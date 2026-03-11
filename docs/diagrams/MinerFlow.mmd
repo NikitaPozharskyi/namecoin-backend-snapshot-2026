@@ -1,0 +1,17 @@
+sequenceDiagram
+    autonumber
+    participant FE as Frontend
+    participant PROXY as HTTP Proxy
+    participant NODE as Miner Node
+    participant TX as Transaction Validator
+    participant CHAIN as Chain Manager
+    participant PEERS as Peers
+
+    FE ->> PROXY: send signed transaction
+    PROXY ->> NODE: forward request
+    NODE ->> TX: validate signature and spend plan
+    TX -->> NODE: accepted transaction
+    NODE ->> CHAIN: queue transaction for inclusion
+    NODE ->> PEERS: broadcast mined block
+    PEERS -->> NODE: receive and compare branch
+    CHAIN -->> NODE: keep longest valid chain

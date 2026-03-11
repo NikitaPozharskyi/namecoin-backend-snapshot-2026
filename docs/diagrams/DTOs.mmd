@@ -1,0 +1,53 @@
+classDiagram
+    direction LR
+
+    class SignedTransaction {
+        +string type
+        +string from
+        +uint64 amount
+        +json payload
+        +[]TxInput inputs
+        +[]TxOutput outputs
+        +string pk
+        +string txId
+        +string signature
+    }
+
+    class NameNew {
+        +string commitment
+        +uint64 ttl
+    }
+
+    class NameFirstUpdate {
+        +string domain
+        +string salt
+        +string ip
+        +uint64 ttl
+        +string txid
+    }
+
+    class NameUpdate {
+        +string domain
+        +string ip
+        +uint64 ttl
+    }
+
+    class Transaction {
+        +string type
+        +string from
+        +[]TxInput inputs
+        +[]TxOutput outputs
+        +uint64 amount
+        +json payload
+    }
+
+    class Block {
+        +BlockHeader header
+        +[]Transaction transactions
+        +[]byte hash
+    }
+
+    SignedTransaction --> NameNew
+    SignedTransaction --> NameFirstUpdate
+    SignedTransaction --> NameUpdate
+    Block --> Transaction
